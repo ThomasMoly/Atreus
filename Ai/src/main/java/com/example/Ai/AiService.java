@@ -112,6 +112,13 @@ The first character must be { and the last character must be }.
     @Transactional
     public List<RecommendedCard> generateRecommendationsForUser(String username) throws Exception {
 
+        List<RecommendedCard> existingCards =
+                recommendedCardRepository.findByUsernameOrderByRecommendationOrderAsc(username);
+
+        if (!existingCards.isEmpty()) {
+            return existingCards;
+        }
+
         List<StatementData> statements = aiRepo.findByUsername(username);
 
         if (statements.isEmpty()) {
@@ -128,12 +135,6 @@ The first character must be { and the last character must be }.
                 .call()
                 .content();
 
-// DEBUG: Print exactly what Gemini returned
-        System.out.println("===== GEMINI RESPONSE =====");
-        System.out.println(aiJson);
-        System.out.println("===========================");
-
-// Remove markdown if Gemini returned it
         aiJson = aiJson
                 .replace("```json", "")
                 .replace("```", "")
@@ -142,8 +143,6 @@ The first character must be { and the last character must be }.
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode root = objectMapper.readTree(aiJson);
         JsonNode recommendations = root.get("recommendations");
-
-        recommendedCardRepository.deleteByUsername(username);
 
         List<RecommendedCard> savedCards = new ArrayList<>();
 
