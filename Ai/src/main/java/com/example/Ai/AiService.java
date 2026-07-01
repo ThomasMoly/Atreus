@@ -45,42 +45,42 @@ MERCHANT TO CARD MAPPING:
 TJ MAXX / MARSHALLS / SIERRA / HOMEGOODS
 Card: TJX Rewards® Platinum Mastercard®
 Cashback Rate: 0.05
-Card Details: Earn rewards on TJX-family purchases including T.J.Maxx, Marshalls, Sierra, and HomeGoods.
+Card Details: Perfect for frequent TJX-family shoppers. Earn 5% back in Rewards at T.J.Maxx, Marshalls, HomeGoods, Sierra, and Homesense, plus 2% back on eligible gas, grocery, and restaurant purchases and 1% back everywhere else Mastercard is accepted. This card is ideal for customers who regularly shop for apparel, home décor, and seasonal merchandise while earning rewards on everyday spending.
 
 LOWE'S
 Card: Lowe's Advantage Card
 Cashback Rate: 0.05
-Card Details: Save on eligible Lowe's purchases or use special financing offers.
+Card Details: A great choice for homeowners and DIY enthusiasts. Receive an everyday 5% discount on eligible Lowe's purchases or choose special financing on qualifying purchases. Ideal for customers who frequently invest in home improvement projects, appliances, or building materials.
 
 PAYPAL
 Card: PayPal Cashback Mastercard®
 Cashback Rate: 0.03
-Card Details: Earn cash back when checking out with PayPal.
+Card Details: Best suited for customers who frequently shop online using PayPal. Earn unlimited 3% cash back on purchases made through PayPal Checkout and 1.5% cash back on all other eligible purchases wherever Mastercard is accepted.
 
 SAM'S CLUB
 Card: Sam's Club® Mastercard®
 Cashback Rate: 0.03
-Card Details: Earn rewards on Sam's Club purchases.
+Card Details: Designed for Sam's Club members looking to maximize warehouse shopping rewards. Earn 3% back on Sam's Club purchases for Plus members, 5% back on eligible gas purchases (up to the annual cap), 3% back on dining and takeout, and 1% back on all other purchases.
 
 WALGREENS / CVS
 Card: myWalgreens® Mastercard®
 Cashback Rate: 0.05
-Card Details: Earn Walgreens Cash rewards on eligible pharmacy, health, and wellness spending.
+Card Details: A strong option for customers who regularly purchase pharmacy, health, and wellness products. Earn 10% Walgreens Cash rewards on Walgreens-branded products, 5% on other Walgreens purchases, 3% on grocery and health & wellness purchases outside Walgreens, and 1% everywhere else Mastercard is accepted.
 
 AMAZON
 Card: Amazon Store Card
 Cashback Rate: 0.05
-Card Details: Earn rewards on eligible Amazon purchases.
+Card Details: Ideal for frequent Amazon shoppers. Eligible Prime members can earn 5% back on Amazon purchases, making this card especially valuable for recurring online shopping and household purchases.
 
 JCPENNEY
 Card: JCPenney Credit Card
 Cashback Rate: 0.05
-Card Details: Earn rewards on eligible JCPenney purchases.
+Card Details: Designed for loyal JCPenney customers. Cardholders can earn rewards on eligible JCPenney purchases while receiving access to exclusive discounts, special financing offers, and promotional shopping events.
 
 DISCOUNT TIRE
 Card: Discount Tire Credit Card
 Cashback Rate: 0.05
-Card Details: Get savings or promotional value on eligible tire and auto service purchases.
+Card Details: Perfect for drivers who frequently purchase tires or vehicle maintenance. Cardholders receive promotional financing options and special savings on eligible tire and automotive service purchases, helping reduce long-term vehicle maintenance costs.
 
 OUTPUT:
 Return ONLY raw valid JSON.
@@ -166,7 +166,7 @@ The first character must be { and the last character must be }.
             card.setExtendedInfoOfUser(
                     String.format(
                             "Based on your spending, you are projected to save approximately $%.2f over the next 6 months with the %s.",
-                            card.getEstimatedRewardsValue() * 2,
+                            card.getEstimatedRewardsValue() * 6,
                             card.getCardName()
                     )
             );
@@ -175,5 +175,9 @@ The first character must be { and the last character must be }.
         }
 
         return savedCards;
+    }
+
+    public List<?> getStatementsByUserName(String username) {
+        return aiRepo.findByUsername(username);
     }
 }

@@ -28,5 +28,9 @@ public class Controller {
         return aiService.generateRecommendationsForUser(username);
     }
 
+    @GetMapping("/statements/{username}")
+    public List<?> getStatementsByUsername(@PathVariable String username){
+        return aiService.getStatementsByUserName(username);
+    }
 }
 
