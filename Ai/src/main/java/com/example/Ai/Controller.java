@@ -1,9 +1,9 @@
 package com.example.Ai;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping
@@ -15,14 +15,16 @@ public class Controller {
         this.aiService = aiService;
     }
 
-    @GetMapping("/ask")
-    public String ask(@RequestParam String prompt) {
-        return aiService.askAI(prompt);
-    }
+
 
     @GetMapping("/")
     public String helloWorld(){
         return "hello world";
+    }
+
+    @GetMapping("/recommendations/{username}")
+    public List<RecommendedCard> getRecommendations(@PathVariable String username) throws Exception {
+        return aiService.generateRecommendationsForUser(username);
     }
 
 }
