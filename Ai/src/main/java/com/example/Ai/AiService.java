@@ -158,7 +158,7 @@ The first character must be { and the last character must be }.
             card.setInfoOfUser(
                     String.format(
                             "You could have saved $%.2f if you used the %s.",
-                            card.getEstimatedRewardsValue(),
+                            card.getEstimatedRewardsValue() * 6,
                             card.getCardName()
                     )
             );
